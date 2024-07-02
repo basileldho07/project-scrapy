@@ -15,7 +15,7 @@ class MySpider(scrapy.Spider):
             if product_link:
                 yield response.follow(product_link, self.parse_product)
 
-        next_page = response.css('a.pagination__item.pagination__item__text.pagination__item pagination__item__text--active').attrib['href']
+        next_page = response.css('a.pagination__item.pagination__item__text.pagination__item pagination__item__text--active').attrib['href'] #not geting the next page data there is a problem in website
         if next_page is not None:
             yield response.follow(next_page,self.parse)
 
@@ -26,8 +26,8 @@ class MySpider(scrapy.Spider):
         image_url = response.css('div.swiper-slide img::attr(src)').get().strip()
         brand = response.css('div.product__area__branding__designer a::text').get().strip()
         product_name = response.css('div.product__area__branding__name::text').get().strip()
-        listing_price = response.css('span.pricing__prices__value--original span.pricing__prices__price::text').get()
-        offer_price = response.css('span.pricing__prices__value--discount span.pricing__prices__price::text').get()
+        listing_price = response.css('span.pricing__prices__value--original span.pricing__prices__price::text').get() #not get the list price there is a error in the website
+        offer_price = response.css('span.pricing__prices__value--discount span.pricing__prices__price::text').get() #not get the offer price there is aerror in the given website
         discount = response.css('span.pricing__info__percentage ::text').get()
         sizes = response.css('div.sizeitem__wrapper span.sizeitem__label::text').getall()
         description = response.css('div.accordion__body__content li::text').getall()
